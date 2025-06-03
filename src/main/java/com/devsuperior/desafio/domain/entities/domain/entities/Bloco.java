@@ -1,6 +1,6 @@
 package com.devsuperior.desafio.domain.entities.domain.entities;
 
-import java.util.List;
+import java.time.Instant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,28 +19,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@Table(name = "TBL_ATIVIDADE")
-public class Atividade {
+@Table(name = "TBL_BLOCO")
+public class Bloco {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant inicio;
 
-    @Column(columnDefinition = "TEXT")
-    private String descricao;
-    private Double preco;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant fim;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-
-    @OneToMany(mappedBy = "atividade")
-    private List<Bloco> blocos;
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
 
 }
