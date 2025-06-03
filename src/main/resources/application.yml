@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: devsuperior-desafio-02
+    jpa:
+        open-in-view: false
+    profiles:
+        active: test
